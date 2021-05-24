@@ -1,0 +1,21 @@
+{
+  "name": "grocery-crud-bootstrap",
+  "version": "1.0.0",
+  "authors": [
+    "John Skoumbourdis <scoumbourdisj@gmail.com>"
+  ],
+  "description": "A twitter bootstrap 3 theme for grocery CRUD",
+  "license": "custom",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap.growl": "~2.0.0",
+    "animate.css": "~3.2.0"
+  }
+}
