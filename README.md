@@ -1,15 +1,5 @@
-# ProGressive Web Apps in CI4-AdminLTE
-
-
-admin username and password 
-
-username: admin@admin.com
-pass: 123456
-
-Output: 
-
+# Dashboard Template - PWA-CI4-AdminLTE-GroceryCRUD
 ## CodeIgniter 4 Development
-
 [![Build Status](https://travis-ci.org/codeigniter4/CodeIgniter4.svg?branch=develop)](https://travis-ci.org/codeigniter4/CodeIgniter4)
 [![Coverage Status](https://coveralls.io/repos/github/codeigniter4/CodeIgniter4/badge.svg?branch=develop)](https://coveralls.io/github/codeigniter4/CodeIgniter4?branch=develop)
 [![Downloads](https://poser.pugx.org/codeigniter4/framework/downloads)](https://packagist.org/packages/codeigniter4/framework)
@@ -18,94 +8,211 @@ Output:
 [![GitHub license](https://img.shields.io/github/license/codeigniter4/CodeIgniter4)](https://github.com/codeigniter4/CodeIgniter4/blob/develop/license.txt)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/codeigniter4/CodeIgniter4/pulls)
 <br>
+## ScreenShoot | Layout
+![image](https://user-images.githubusercontent.com/48039483/121282031-1fc4ad00-c903-11eb-8348-62607f65f848.png)
 
-## What is CodeIgniter?
+**Admin username and password:**
+* Username: admin@admin.com
+* pass: 123456
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible, and secure.
-More information can be found at the [official site](http://codeigniter.com).
+Output:
 
-This repository holds the source code for CodeIgniter 4 only.
-Version 4 is a complete rewrite to bring the quality and the code into a more modern version,
-while still keeping as many of the things intact that has made people love the framework over the years.
+![image](https://user-images.githubusercontent.com/48039483/121282267-661a0c00-c903-11eb-882d-bfd204bbc9e4.png)
 
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
+**Client username and password**
+* Username: test@client.com
+* pass:123456
 
-### Documentation
+Output:
 
-The [User Guide](https://codeigniter4.github.io/userguide/) is the primary documentation for CodeIgniter 4.
+![image](https://user-images.githubusercontent.com/48039483/121282714-2bfd3a00-c904-11eb-8830-881e44dd3b47.png)
 
-The current **in-progress** User Guide can be found [here](https://codeigniter4.github.io/CodeIgniter4/).
-As with the rest of the framework, it is a work in progress, and will see changes over time to structure, explanations, etc.
+![image](https://user-images.githubusercontent.com/48039483/121282750-3a4b5600-c904-11eb-84af-04b0e06da503.png)
 
-You might also be interested in the [API documentation](https://codeigniter4.github.io/api/) for the framework components.
+## Kemudahan yang diberikan
+### Fitur pada proyek Dashboard Template
+* Fitur Progresive Web Apps (PWA)
+* Dapat diunduh pada perangkat smartphone (Android dan iOS)
+* Mode Offline 
+* Push Notification
+* Sistem caching yang handal
+* Aplikasi yang diunduh dapat berjalan seperti aplikasi native
 
-## Important Change with index.php
+### CodeIgniter 4 & AdminLTE 3
+> Memudahkan anda untuk menggunakan proyek ini, tanpa harus mengintegrasikan kembali AdminLTE pada CodeIgniter 4.
 
-index.php is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+[Documentation CI4](https://codeigniter.com/docs) | [Documentation AdminLTE3](https://adminlte.io/docs/3.0/)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+### Grocery CRUD versi 2.0.0
+> Ditambah sudah integrasikan juga Grocery CRUD untuk memudahkan Create Read Update Delete.
 
-**Please** read the user guide for a better explanation of how CI4 works!
-The user guide updating and deployment is a bit awkward at the moment, but we are working on it!
+[Documentation GroceryCRUD](https://www.grocerycrud.com/v1.x/documentation)
 
-## Repository Management
+### Progresive Web Apps (PWA)
+> Aplikasi Web sudah dintegrasikan juga dengan teknologi web PWA.
 
-CodeIgniter is developed completely on a volunteer basis. As such, please give up to 7 days
-for your issues to be reviewed. If you haven't heard from one of the team in that time period,
-feel free to leave a comment on the issue so that it gets brought back to our attention.
+[Documentation PWA](https://developers.google.com/web/ilt/pwa)
 
-We use Github issues to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+### Struktur Program
+<pre>
+├── admin
+│   ├── css
+│   ├── framework
+│   ├── module
+│   ├── starter
+│   ├── userguide
+|   ├── README.md
+|   ├── ...
+│   └── workflow.md
+├── app
+│   ├── Config
+│   │   ├── App.php
+│   │   ├── Autoload.php
+│   │   ├── ...
+│   │   ├── GroceryCrud.php
+│   │   ├── ...
+│   │   ├── Format.php
+│   │   ├── Honeypot.php
+│   │   ├── ...
+│   │   └── View.php
+│   ├── Controllers
+│   │   ├── BaseController.php
+│   │   ├── ...
+│   │   └── Home.php
+│   ├── Database
+│   ├── Libraries
+│   │   ├── ...
+│   │   ├── GroceryCrud.php
+│   │   ├── Image_moo.php
+│   │   ├── ...
+│   │   └── Template.php
+│   ├── Models
+│   │   ├── Grocery_crud_model.php
+│   │   ├── GroceryCrudModel.php
+│   │   ├── PushModel.php
+│   │   └── UsersModel.php
+│   ├── ThirdParty
+│   ├── Views
+│   │   ├── errors
+│   │   ├── parts
+│   │   ├── ...
+│   │   └── welcome_message.php
+|   ├── .htaccess
+|   ├── Common.php
+│   └── index.html
+├── public
+│   ├── assets
+│   │   ├── bootstrap
+│   │   ├── plugins
+│   │   ├── uploads
+│   │   ├── ...
+│   │   └── yarn.lock
+│   ├── grocery-crud
+│   │   ├── config
+│   │   ├── css
+│   │   ├── fonts
+│   │   ├── js
+│   │   ├── language
+│   │   ├── texteditor
+│   │   ├── themes
+│   │   ├── ...
+│   │   └── license-mit.txt
+│   ├── images
+│   ├── scripts
+│   ├── connected.php
+│   ├── ...
+│   ├── manifest.json
+│   ├── pwabuilder-sw.js
+│   ├── index.php
+│   ├── favicon.ico
+│   ├── index.php
+│   └── robots.txt
+├── systems
+├── writable
+└── spark</pre>
 
-If you raise an issue here that pertains to support or a feature request, it will
-be closed! If you are not sure if you have found a bug, raise a thread on the forum first -
-someone else may have encountered the same thing.
+# Requirements 
+- CodeIgniter >= 4.0 
+- PHP versi >= 7.0
+- Grocery CRUD 2.0.0
+- XAMPP 
+- Code Editor (dalam tutorial ini menggunakan Visual Studio Code)
 
-Before raising a new Github issue, please check that your bug hasn't already
-been reported or fixed.
-
-We use pull requests (PRs) for CONTRIBUTIONS to the repository.
-We are looking for contributions that address one of the reported bugs or
-approved work packages.
-
-Do not use a PR as a form of feature request.
-Unsolicited contributions will only be considered if they fit nicely
-into the framework roadmap.
-Remember that some components that were part of CodeIgniter 3 are being moved
-to optional packages, with their own repository.
-
-## Contributing
-
-We **are** accepting contributions from the community!
-
-We will try to manage the process somewhat, by adding a ["help wanted" label](https://github.com/codeigniter4/CodeIgniter4/labels/help%20wanted) to those that we are
-specifically interested in at any point in time. Join the discussion for those issues and let us know
-if you want to take the lead on one of them.
-
-At this time, we are not looking for out-of-scope contributions, only those that would be considered part of our controlled evolution!
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the user guide.
-
-## Server Requirements
-
-PHP version 7.2 or higher is required, with the following extensions installed:
-
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- xml (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
-
-## Running CodeIgniter Tests
-
-Information on running the CodeIgniter test suite can be found in the [README.md](tests/README.md) file in the tests directory.
-# pwa
+# Installing Guide
+## Link Tutorial Instalilasi 
+[<<<<<<<link: dalam proses pembuatan>>>>>>>>](https://www.youtube.com/)
+## Unduh File Repositori
+1. Mengunduh file repositori
+* Unduh secara langsung
+  - Unduh file repositori dalam bentuk zip
+* Dengan git
+  - copy link berikut :
+  ```bash
+  https://github.com/MuhamadFadil/PWA-Dashboard-Template.git
+  ```
+  - Letakan sesuai dengan repositori yang diinginkan, lebih baik diletakan pada file `C:/xampp/htdocs`
+## Siapkan XAMPP & Code Editor
+1. Download XAMPP
+  -- [Downlod XAMMP](https://www.apachefriends.org/download.html)
+3. Download Visual Studio Code (VS Code)
+  -- [Download VS Code](https://code.visualstudio.com/download)
+## Instalisasi Dashboard Template
+1. Extract file zip pada htdocs (pada folder XAMPP)
+2. Buat nama folder proyek (pada turioal diberi nama PWADashboard)
+3. Buka aplikasi XAMPP, kemudian lakukan konfigurasi berikut
+   - Pada `config`, pilih `httpd.conf`
+     ![image](https://user-images.githubusercontent.com/48039483/123469918-e176ff80-d61d-11eb-9027-0d123596b4c3.png)
+   - Ubah isi file 
+      ```bash
+      DocumentRoot "C:/xampp/htdocs"
+      <Directory "C:/xampp/htdocs">
+      ```
+      ke 
+      
+      ```bash
+      DocumentRoot "C:/xampp/htdocs/PWADashboard"
+      <Directory "C:/xampp/htdocs/PWADashboard">
+      ```
+    - Tentukan port yang diinginkan (secara default port:8080)
+    - Kemudian, `start` pada Apache dan MySQL
+      ![image](https://user-images.githubusercontent.com/48039483/123473659-1043a480-d623-11eb-9539-c458998a2970.png)
+5. Jalankan http://localhost:8080/
+## Membuat Database
+1. Jalankan MySQL `admin` atau klik http://localhost:8080/phpmyadmin/
+  ![image](https://user-images.githubusercontent.com/48039483/123473775-3cf7bc00-d623-11eb-9d0a-f08824b3c3c0.png)
+3. Buat database baru
+4. Beri nama databse (pada tutorial diberi nama pwadashboard_tb)
+5. Import data SQL pada folder PWADashboard ke database yang dibuat
+## Mengatur `.env`
+1. Buka VS Code
+2. Buka folder proyek PWADashboard
+3. Membuka file `.env`, kemudian ubah isi file `.env`
+  - Environment
+  ```bash 
+  CI_ENVIRONMENT = development
+  #CI_ENVIRONMENT = production
+  ```
+  - Base URL Apps
+  ```bash
+  app.baseURL = 'http://localhost:8080/'
+  ```
+  - Database
+  ```bash
+  database.default.hostname = localhost
+  database.default.database = pwadashboard_tb
+  database.default.username = root
+  database.default.password = 
+  database.default.DBDriver = MySQLi
+  ```
+4. Melakukan penyesuaian pada file kode yang membutuhkan database, berikut file yang harus disesuaikan dengan databasenya:
+    * /public
+      - `connected.php`
+    * app/Controller
+      - `Setting.php`
+      - `Users.php`
+    * app/Models
+      - `PushNotif.php`
+      - `UsersModel.php`
+ 
+## License
+This package is free software distributed under the terms of the [MIT license](LICENSE.md).
