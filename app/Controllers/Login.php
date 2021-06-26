@@ -236,6 +236,7 @@ class Login extends BaseController{
 		}
 		return view("reset_password", $output);
 	}
+	
 	public function test()
 	{
 		$contents = file_get_contents("assets/provinsi.json");

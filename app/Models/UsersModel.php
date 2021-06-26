@@ -12,7 +12,7 @@ class UsersModel extends Model
 		$db = \Config\Database::connect();
 		$username = $data['username'];
 		$password = md5($data['password']);
-		$dologin = $db->query("select * from users where email = '$username' and password = '$password' and status = 'Active'");
+		$dologin = $db->query("select * from users where email = '$username' and password = '$password'");
 		//echo '<pre>';echo "select * from users where (username = '$username' or email = '$username') and password = '$password'";print_r($dologin);die();
 		return $dologin;
 	}

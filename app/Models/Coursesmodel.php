@@ -1,9 +1,7 @@
 <?php
-namespace App\Models;
-use CodeIgniter\Model;
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Coursesmodel extends Model {
+class Coursesmodel extends CI_Model {
 	public function getCurrentTerm(){
 			$q = $this->db->query("select *,concat(year_start,'/',year_start+1 ,' ',semester) as name from timing where start_date <= CURRENT_TIMESTAMP and end_date >= CURRENT_TIMESTAMP limit 1");
 		$r1 = $q->row();

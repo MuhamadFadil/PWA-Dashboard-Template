@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>PWA DashBoard</title>
+  <title>SmartCity Rank</title>
   <link rel="shortcut icon" type="image/x-icon" href="<?php echo base_url("assets/_ico.png"); ?>">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?= (defined('USE_CDN') && USE_CDN == 1) ? 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css' : base_url("assets/bootstrap/css/font-awesome.min.css") ?>">
@@ -34,7 +34,7 @@
     <header class="main-header">
       <a href="" class="logo">
         <span class="logo-mini" aria-info="50x50px"><b>SC</b>R </span>
-        <span class="logo-lg"><b>PWA</b> DashBoard </span>
+        <span class="logo-lg"><b>SmartCity</b> Rank </span>
 			</a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">

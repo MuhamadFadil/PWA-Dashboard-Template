@@ -62,13 +62,14 @@ class GroceryCrud
      * Default theme for grocery CRUD. You can choose between 'flexigrid', 'datatables', 'bootstrap', 'bootstrap-v4', 'tablestrap'
      * @var string
      */
-    public $default_theme = 'tablestrap';
+    public $default_theme = 'bootstrap';
+    //public $default_theme = 'datatables';
 
     /**
      * The environment is important so we can have specific configurations for specific environments
      * @var string
      */
-    public $environment = 'production';
+    public $environment = 'development';
 
     /**
      * Turn XSS clean into true in case you are exposing your CRUD into public. Please be aware that this is

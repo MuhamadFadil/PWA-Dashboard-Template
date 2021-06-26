@@ -1,21 +1,20 @@
-<?php
-// use CodeIgniter\Session\Session;
-echo view("parts/header");
+<?php echo view("parts/header");
+// echo view("parts/upup");
 echo view("parts/settingView");
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 </head>
-
 <body>
 	<section class="content-header">
-	<h1>Data Subscribers</h1>
+		<h1>Data Subscribers</h1>
 	</section>
 	<section class="content">
+		<?php if (in_array($_SESSION['DATA_SESSION']['role'], array('Admin', "reviewer"))) { ?>
 			<!-- <div class="table-responsive"> -->
 			<div class="row">
 				<div class="col-md-12">
@@ -33,7 +32,7 @@ echo view("parts/settingView");
 										<tr>
 											<th>No.</th>
 											<th>Subcribers</th>
-											<th>Kota/Kabubapten</th>
+											 <th>Kota/Kabubapten</th> 
 											<th>Auth</th>
 											<th>Data Access</th>
 											<th>Action</th>
@@ -49,18 +48,16 @@ echo view("parts/settingView");
 										?>
 											<tr>
 												<td><?= $no ?></td>
-												<!-- <td><?= $row->id_user?></td> -->
 												<td><?= $row->name_user?></td>
 												<td><?= $row->kota_user?></td>
 												<td><?= $row->auth?></td>
 												<td><?= $row->log?></td>
 												<td>
-													<!-- referensi pdq code icons: http://www.pdqcoders.com/font-based-icons.html -->
-													<!-- https://material.io/components/menus#usage -->
-													<!-- <a href="#test" onclick="window.location='<?php echo site_url('setting/sendAll')?>'" class="test" data-toggle="modal"><i class="material-icons md-dark" data-toggle="tooltip" title="Test Push">&#xe627;</i></a> -->
-													<a href="#test" onclick="sendAll('<?= $row->id_subs ?>')" class="test" data-toggle="modal" id="tombol"><i class="material-icons md-dark" data-toggle="tooltip" title="Test Push">&#xe627;</i></a>
-
-													<a href="#kirimPesan" class="kirim" data-toggle="modal" data-whatever="<?= $row->name_user?>" data-whatever2="<?= $row->kota_user?>"><i class="material-icons md-light orange" data-toggle="tooltip" title="Kirin Pesan">&#xe0c9;</i></a>			
+													
+													<a href="#broadcast" onclick="window.location='<?php echo site_url('setting/sendPushMessage')?>'" class="test" data-toggle="modal"><i class="material-icons md-dark" data-toggle="tooltip" title="Test Push">&#xe627;</i></a>
+													
+										
+													<a href="#kirimPesan" class="kirim" data-toggle="modal" data-whatever="<?= $row->name_user?>" data-whatever2="<?= $row->kota_user?>"><i class="material-icons md-light orange" data-toggle="tooltip" title="Kirin Pesan">&#xe0c9;</i></a>
 
 														<div class="modal fade" id="kirimPesan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
@@ -85,11 +82,12 @@ echo view("parts/settingView");
 															</div>
 															<div class="modal-footer">
 																<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																<button type="button" class="btn btn-primary">Send message</button>
+																<button type="button" onclick="custom_user('<?= $row->id_subs ?>')" class="btn btn-primary">Send message</button>
 															</div>
 															</div>
 														</div>
 														</div>
+														
 														<script>
 															$('#kirimPesan').on('show.bs.modal', function (event) {
 															var a = $(event.relatedTarget) // Button that triggered the modal
@@ -97,11 +95,11 @@ echo view("parts/settingView");
 															// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 															// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 															var b =  $(event.relatedTarget)
-															var kota = b.data('whatever2'); 
+															var kota = b.data('whatever2');
 															var modal = $(this)
-															modal.find('.modal-title').text('To ' + recipient)
-															modal.find('.modal-body input').val(recipient + '['+ kota +']')
-															// modal.find('.modal-body message-text').val(kota)
+															modal.find('.modal-title').text('Message to ' + recipient)
+												// 			modal.find('.modal-body input').val(recipient)
+												modal.find('.modal-body input').val(recipient + ' ['+ kota +']')
 															})
 														</script>
 
@@ -112,20 +110,36 @@ echo view("parts/settingView");
 
 									</tbody>
 								</table>
-
+								
+								
 									<script type="text/javascript"> 
-										function sendAll(id_subs){
-											pesan = confirm('kirim data ?');
+									
+										function sendPushMessage(id){
+											pesan = confirm('Coba kirim data' + '?');
 											
 											if(pesan){
-												window.location.href=("<?= site_url('setting/sendAll/') ?>") + id_subs; 
-											}else return false; 
+												window.location.href=("<?= site_url('/setting/test2/') ?>") + id_user;
+											
+											}
+											else return false; 
 										}
 									
 									</script>
-
-									<script type="text/javascript"> 
-										function hapus(id_subs){
+									
+									<script type="text/javascript">
+								// 	sessionStorage.setItem('custom_ID', '<?= $row->id_subs?>');
+									    function custom_user(id_subs){
+									    	pesan = confirm('Coba kirim data' + '?');
+									  
+											if(pesan){
+												window.location.href=("<?= site_url('/setting/custom_user/') ?>")+id; 
+											}else return false; 
+										}
+									    
+									</script>
+								
+								<script type="text/javascript"> 
+										function hapus(id){
 											const swalWithBootstrapButtons = Swal.mixin({
 												customClass: {
 													confirmButton: 'btn btn-success',
@@ -144,7 +158,7 @@ echo view("parts/settingView");
 												reverseButtons: true
 												}).then((result) => {
 												if (result.isConfirmed) {
-													window.location.href=("<?= site_url('setting/hapus/') ?>") + id_subs;
+													window.location.href=("<?= site_url('/setting/hapus/') ?>") + id;
 
 													swalWithBootstrapButtons.fire(
 													'Terhapus!',
@@ -162,18 +176,9 @@ echo view("parts/settingView");
 													)
 												}
 												})
-											// pesan = confirm('Yakin hapus data user ?');
-											
-											// if(pesan){
-											// 	window.location.href=("<?= site_url('setting/hapus/') ?>") + id_subs; 
-											// }else return false; 
 										}
 									</script>
-
-									<script>
-										
-									</script>	
-
+									
 							</div>
 							<?php if (count($tampil) == 0) {
 								echo '<center><br><i>Empty.</i></center>';
@@ -185,23 +190,17 @@ echo view("parts/settingView");
 
 			</div>
 			<!-- </div> -->
-
-		<!-- <section class="subscription-details js-subscription-details is-invisible">
-			<p><a href="https://web-push-codelab.glitch.me//">Push Companion
-					Site</a></p>
-					<p>Subscribe:</p>
-			<pre><code class="js-subscription-json"></code></pre>
-		</section> -->
-
-		<!-- <div class="container mt-3 mb-3" style="background-color:#dfdfdf; height: 250px; border-radius: 15px;">
-			<br>
-			<h3 class="mt-2 mb-2" style="text-align: left;">Subscription JSON:</h3>
-			<span class="m-3" id="subscription-json" style="font-size: 24px; overflow-wrap: break-word;"></span>
-		</div> -->
+		<?php } ?>
 	</section>
-
 </body>
 <script src="/scripts/main.js"></script>
+
+<script>
+localStorage.setItem('nama', '<?php echo $_SESSION['DATA_SESSION']['name'];?>');
+localStorage.setItem('id', '<?php echo $_SESSION['DATA_SESSION']['id'];?>');
+// sessionStorage.setItem('userID', '<?= $row->id_user?>');
+</script>
+
 </html>
 <br>
 <?php echo view("parts/footer"); ?>

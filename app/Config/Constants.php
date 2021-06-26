@@ -76,6 +76,6 @@ defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
-defined('USE_CDN')||define('USE_CDN',0); //Ruki: use CDN for JS and CSS
+//defined('USE_CDN')||define('USE_CDN',0); //Ruki: use CDN for JS and CSS
 defined('APPNAME')||define('APPNAME','PWA DashBoard'); //Ruki: use CDN for JS and CSS
-defined('APPNAME')||define('COPYRIGHTTXT','PWA DashBoard Project');
+//defined('APPNAME')||define('COPYRIGHTTXT','Pajon.co.id Ver. 0.9');

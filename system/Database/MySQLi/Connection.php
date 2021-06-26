@@ -227,6 +227,13 @@ class Connection extends BaseConnection implements ConnectionInterface
 
 		return false;
 	}
+	
+	//update --> fadil
+	public function update (){
+		// $DBDriver->_listTables->where->update($data);
+
+		//$this->db->table($table)->where($where)->update($save_data); 
+	}
 
 	//--------------------------------------------------------------------
 

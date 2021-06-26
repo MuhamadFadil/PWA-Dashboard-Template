@@ -3,7 +3,9 @@
 $data = [
   "title" => "login",
 ];
-echo view("parts/header_front", $data); ?>
+echo view("parts/header_front", $data); 
+
+echo view("parts/load");?>
 
 <body class="hold-transition skin-red  login-page">
 <div class="login-box">
@@ -28,7 +30,7 @@ echo view("parts/header_front", $data); ?>
       </div>
       <div class="form-group has-feedback">
 				<div id="q"><br><?php if(isset($question)){echo $question;} ?></div>
-				<input type="text" class="form-control" placeholder="?" name="date">
+				<input type="password" class="form-control" placeholder="?" name="date">
       </div>
 			<center>
 				<button class="btn btn-success btn-block btn-flat" type="submit">Sign In</button>
@@ -40,7 +42,7 @@ echo view("parts/header_front", $data); ?>
 		<center>
 			<div class="row">
 					<div class="">
-						<!--a class="btn btn-default btn-flat" href="register">Register</a--> &nbsp; 
+						<!--<a class="btn btn-default btn-flat" href="register">Register</a> &nbsp; -->
 						<input type="submit" class="btn btn-default btn-flat" value="Forgot Password">
 					</div>
 			</div>
@@ -49,8 +51,7 @@ echo view("parts/header_front", $data); ?>
 
   </div>
 </div>
-<div style="color:#999;position:fixed;bottom:0;right:0;padding:15px">&copy;<?=date('Y')?> Pajon.co.id
+<div style="color:#999;position:fixed;bottom:0;right:0;padding:15px">&copy; 2020 All Rights Reserved.
 </div>
-
 
 <?php echo view("parts/footer_front"); ?>

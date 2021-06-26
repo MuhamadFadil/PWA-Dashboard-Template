@@ -1,7 +1,9 @@
 <?php namespace Config;
 
+
 class View extends \CodeIgniter\Config\View
 {
+	
 	/**
 	 * When false, the view method will clear the data between each
 	 * call. This keeps your data safe and ensures there is no accidental

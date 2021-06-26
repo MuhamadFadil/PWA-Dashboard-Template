@@ -1,0 +1,12 @@
+const multer = require('multer');
+
+const upload = multer({
+    limits: {
+        fileSize: 4 * 1024 * 1024,
+    }
+});
+
+app.post('./shareTarget/formtambah/#upload', upload.single('upload'), function(req, res) {
+    const file = req.file;
+    // now you can do whatever you want with the file 
+});

@@ -31,7 +31,7 @@ class Database extends \CodeIgniter\Database\Config
 	 */
 	public $default = [
 		'DSN'      => '',
-		'hostname' => 'localhost',
+		'hostname' => '',
 		'username' => '',
 		'password' => '',
 		'database' => '',
@@ -46,7 +46,7 @@ class Database extends \CodeIgniter\Database\Config
 		'swapPre'  => '',
 		'encrypt'  => false,
 		'compress' => false,
-		'strictOn' => false,
+		'strictOn' => true,
 		'failover' => [],
 		'port'     => 3306,
 	];
@@ -60,10 +60,10 @@ class Database extends \CodeIgniter\Database\Config
 	public $tests = [
 		'DSN'      => '',
 		'hostname' => '127.0.0.1',
-		'username' => '',
+		'username' => 'root',
 		'password' => '',
 		'database' => ':memory:',
-		'DBDriver' => 'SQLite3',
+		'DBDriver' => 'mysqli',
 		'DBPrefix' => 'db_',  // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
 		'pConnect' => false,
 		'DBDebug'  => (ENVIRONMENT !== 'production'),

@@ -14,6 +14,7 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 	public $psr4 = [];
 
 	public $classmap = [];
+
 	//--------------------------------------------------------------------
 
 	/**
@@ -26,6 +27,8 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 	public function __construct()
 	{
 		parent::__construct();
+		
+		$autoload['libraries'] = array("GroceryCrud","database");
 
 		/**
 		 * -------------------------------------------------------------------
@@ -71,11 +74,6 @@ class Autoload extends \CodeIgniter\Config\AutoloadConfig
 		 *   ];
 		 */
 		$classmap = [];
-
-		//autoload librari 
-		//:::::$autoload['libraries'] = array();
-		//'session', this mean start session ini_set()
-		// $autoload['libraries'] = array('session', 'database');
 
 		//--------------------------------------------------------------------
 		// Do Not Edit Below This Line

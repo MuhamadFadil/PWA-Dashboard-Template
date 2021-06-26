@@ -4,3 +4,6 @@
 <IfModule !authz_core_module>
     Deny from all
 </IfModule>
+
+#define limit_memory_access
+# php_value memory_limit 512M

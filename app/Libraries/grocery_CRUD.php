@@ -16,7 +16,7 @@
  * @package    	grocery CRUD
  * @copyright  	Copyright (c) 2010 through 2014, John Skoumbourdis
  * @license    	https://github.com/scoumbourdis/grocery-crud/blob/master/license-grocery-crud.txt
- * @version    	1.6.1
+ * @version    	1.6.4
  * @author     	John Skoumbourdis <scoumbourdisj@gmail.com>
  */
 
@@ -135,65 +135,92 @@ class grocery_CRUD_Field_Types
 			}
 		}
 
-		if(!empty($this->add_fields))
-			foreach($this->add_fields as $field_object)
-			{
-				$field_name = isset($field_object->field_name) ? $field_object->field_name : $field_object;
+		if (!empty($this->add_fields)) {
+            foreach ($this->add_fields as $field_object) {
+                $field_name = isset($field_object->field_name) ? $field_object->field_name : $field_object;
 
-				if(!isset($types[$field_name]))//Doesn't exist in the database? Create it for the CRUD
-				{
-					$extras = false;
-					if($this->change_field_type !== null && isset($this->change_field_type[$field_name]))
-					{
-						$field_type = $this->change_field_type[$field_name];
-						$extras 	=  $field_type->extras;
-					}
+                if (!isset($types[$field_name]))//Doesn't exist in the database? Create it for the CRUD
+                {
+                    $extras = false;
+                    if ($this->change_field_type !== null && isset($this->change_field_type[$field_name])) {
+                        $field_type = $this->change_field_type[$field_name];
+                        $extras = $field_type->extras;
+                    }
 
-					$field_info = (object)array(
-						'name' => $field_name,
-						'crud_type' => $this->change_field_type !== null && isset($this->change_field_type[$field_name]) ?
-											$this->change_field_type[$field_name]->type :
-											'string',
-						'display_as' => isset($this->display_as[$field_name]) ?
-												$this->display_as[$field_name] :
-												ucfirst(str_replace("_"," ",$field_name)),
-						'required'	=> !empty($this->required_fields) && in_array($field_name,$this->required_fields) ? true : false,
-						'extras'	=> $extras
-					);
+                    $field_info = (object)array(
+                        'name' => $field_name,
+                        'crud_type' => $this->change_field_type !== null && isset($this->change_field_type[$field_name]) ?
+                            $this->change_field_type[$field_name]->type :
+                            'string',
+                        'display_as' => isset($this->display_as[$field_name]) ?
+                            $this->display_as[$field_name] :
+                            ucfirst(str_replace("_", " ", $field_name)),
+                        'required' => !empty($this->required_fields) && in_array($field_name, $this->required_fields) ? true : false,
+                        'extras' => $extras
+                    );
 
-					$types[$field_name] = $field_info;
-				}
-			}
+                    $types[$field_name] = $field_info;
+                }
+            }
+        }
 
-		if(!empty($this->edit_fields))
-			foreach($this->edit_fields as $field_object)
-			{
-				$field_name = isset($field_object->field_name) ? $field_object->field_name : $field_object;
+		if (!empty($this->edit_fields)) {
+            foreach ($this->edit_fields as $field_object) {
+                $field_name = isset($field_object->field_name) ? $field_object->field_name : $field_object;
 
-				if(!isset($types[$field_name]))//Doesn't exist in the database? Create it for the CRUD
-				{
-					$extras = false;
-					if($this->change_field_type !== null && isset($this->change_field_type[$field_name]))
-					{
-						$field_type = $this->change_field_type[$field_name];
-						$extras 	=  $field_type->extras;
-					}
+                if (!isset($types[$field_name]))//Doesn't exist in the database? Create it for the CRUD
+                {
+                    $extras = false;
+                    if ($this->change_field_type !== null && isset($this->change_field_type[$field_name])) {
+                        $field_type = $this->change_field_type[$field_name];
+                        $extras = $field_type->extras;
+                    }
 
-					$field_info = (object)array(
-						'name' => $field_name,
-						'crud_type' => $this->change_field_type !== null && isset($this->change_field_type[$field_name]) ?
-											$this->change_field_type[$field_name]->type :
-											'string',
-						'display_as' => isset($this->display_as[$field_name]) ?
-												$this->display_as[$field_name] :
-												ucfirst(str_replace("_"," ",$field_name)),
-						'required'	=> in_array($field_name,$this->required_fields) ? true : false,
-						'extras'	=> $extras
-					);
+                    $field_info = (object)array(
+                        'name' => $field_name,
+                        'crud_type' => $this->change_field_type !== null && isset($this->change_field_type[$field_name]) ?
+                            $this->change_field_type[$field_name]->type :
+                            'string',
+                        'display_as' => isset($this->display_as[$field_name]) ?
+                            $this->display_as[$field_name] :
+                            ucfirst(str_replace("_", " ", $field_name)),
+                        'required' => in_array($field_name, $this->required_fields) ? true : false,
+                        'extras' => $extras
+                    );
 
-					$types[$field_name] = $field_info;
-				}
-			}
+                    $types[$field_name] = $field_info;
+                }
+            }
+        }
+
+        if (!empty($this->read_fields)) {
+            foreach ($this->read_fields as $field_object) {
+                $field_name = isset($field_object->field_name) ? $field_object->field_name : $field_object;
+
+                if (!isset($types[$field_name]))//Doesn't exist in the database? Create it for the CRUD
+                {
+                    $extras = false;
+                    if ($this->change_field_type !== null && isset($this->change_field_type[$field_name])) {
+                        $field_type = $this->change_field_type[$field_name];
+                        $extras = $field_type->extras;
+                    }
+
+                    $field_info = (object)array(
+                        'name' => $field_name,
+                        'crud_type' => $this->change_field_type !== null && isset($this->change_field_type[$field_name]) ?
+                            $this->change_field_type[$field_name]->type :
+                            'string',
+                        'display_as' => isset($this->display_as[$field_name]) ?
+                            $this->display_as[$field_name] :
+                            ucfirst(str_replace("_", " ", $field_name)),
+                        'required' => !empty($this->required_fields) && in_array($field_name, $this->required_fields) ? true : false,
+                        'extras' => $extras
+                    );
+
+                    $types[$field_name] = $field_info;
+                }
+            }
+        }
 
 		$this->field_types = $types;
 
@@ -249,7 +276,7 @@ class grocery_CRUD_Field_Types
 			{
 				$field_info->input = $this->get_string_input($field_info,$value);
 			}
-		$field_info->input = $field_info->input; //.'<h1>$shown_field_info</h1>';
+
 		return $field_info;
 	}
 
@@ -468,7 +495,7 @@ class grocery_CRUD_Field_Types
  *
  * @package    	grocery CRUD
  * @author     	John Skoumbourdis <scoumbourdisj@gmail.com>
- * @version    	1.6.1
+ * @version    	1.6.4
  * @link		http://www.grocerycrud.com/documentation
  */
 class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
@@ -478,12 +505,18 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 	 */
 	public $basic_model = null;
 
+	// protected function set_default_Model()
+	// {
+	// 	$ci = &get_instance();
+	// 	$ci->load->model('Grocery_crud_model');
+
+	// 	$this->basic_model = new Grocery_crud_model();
+	// }
+
 	protected function set_default_Model()
 	{
-		$ci = &get_instance();
-		$ci->load->model('Grocery_crud_model');
-
-		$this->basic_model = new Grocery_crud_model();
+		//$this->basic_model = new Grocery_crud_model();
+		$this->basic_model = new \App\Models\GroceryCrudModel();
 	}
 
 	protected function get_total_results()
@@ -936,7 +969,6 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 
 		if($validation_result->success)
 		{
-
 			$post_data = $state_info->unwrapped_data;
 
             if ($this->config->xss_clean) {
@@ -944,20 +976,17 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
             }
 
 			$add_fields = $this->get_add_fields();
+
 			if($this->callback_insert === null)
 			{
 				if($this->callback_before_insert !== null)
 				{
 					$callback_return = call_user_func($this->callback_before_insert, $post_data);
 
-					if(!empty($callback_return) && is_array($callback_return)){
+					if(!empty($callback_return) && is_array($callback_return))
 						$post_data = $callback_return;
-					}elseif(is_string($callback_return)){
-						die('{"success":false ,"error_message":"'.$callback_return.'"}'); //RUKI
-						// return array('status' => false,'message' => $callback_return); //RUKI
-					}elseif($callback_return === false){
+					elseif($callback_return === false)
 						return false;
-					}
 				}
 
 				$insert_data = array();
@@ -1002,7 +1031,6 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 						}
 					}
 				}
-				// die('n1');
 
 				$insert_result =  $this->basic_model->db_insert($insert_data);
 
@@ -1012,7 +1040,6 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 				}
 				else
 				{
-					// die('n2');
 					return false;
 				}
 
@@ -1031,7 +1058,6 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 
 					if($callback_return === false)
 					{
-						// die('n3');
 						return false;
 					}
 
@@ -1042,18 +1068,16 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 
 					if($callback_return === false)
 					{
-						// die('n4');
 						return false;
 					}
 			}
-			
-			// die('n5');
 
 			if(isset($insert_primary_key))
 				return $insert_primary_key;
 			else
 				return true;
 		}
+
 		return false;
 
 	}
@@ -1086,10 +1110,6 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 					elseif($callback_return === false)
 					{
 						return false;
-					}
-					elseif( is_string($callback_return)) //RUKI biar error saat callback_before_update bisa punya custom notification: following https://www.grocerycrud.com/forums/topic/2109-error-messages/#entry15705
-					{
-						return array('status' => false,'message' => $callback_return);
 					}
 
 				}
@@ -1608,7 +1628,7 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
  *
  * @package    	grocery CRUD
  * @author     	John Skoumbourdis <scoumbourdisj@gmail.com>
- * @version    	1.6.1
+ * @version    	1.6.4
  */
 class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 {
@@ -1648,8 +1668,6 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 
         $data->dialog_forms = $this->config->dialog_forms;
 		$data->columns 				= $this->get_columns();
-		$data->columnNoSearch	= $this->columnNoSearch;
-		$data->columnNoSorting	= $this->columnNoSorting;
 
 		$data->success_message		= $this->get_success_message_at_list($state_info);
 
@@ -1676,6 +1694,8 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		$data->unset_export			= $this->unset_export;
 		$data->unset_print			= $this->unset_print;
 
+		$data->jquery_js            = grocery_CRUD::JQUERY;
+
 		$default_per_page = $this->config->default_per_page;
 		$data->paging_options = $this->config->paging_options;
 		$data->default_per_page		= is_numeric($default_per_page) && $default_per_page >1 && in_array($default_per_page,$data->paging_options)? $default_per_page : 25;
@@ -1700,7 +1720,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 			$this->_add_js_vars(array('dialog_forms' => $this->config->dialog_forms));
 
 			$data->list_view = $this->_theme_view('list.php',$data,true);
-			$this->_theme_view('list_template.php',$data); //columns
+			$this->_theme_view('list_template.php', $data);
 		}
 		else
 		{
@@ -2046,7 +2066,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		{
 			if(!empty($field_info->primary_key) && !$this->unset_edit)
 			{
-				return $this->l('insert_success_message')." <a class='go-to-edit-form' href='".$this->getEditUrl($field_info->primary_key)."'>".$this->l('form_edit')." {$this->subject}</a>";
+				return $this->l('insert_success_message')." <a class='go-to-edit-form' href='".$this->getEditUrl($field_info->primary_key)."'>".$this->l('form_edit')." {$this->subject}</a> ";
 			}
 			else
 			{
@@ -2291,14 +2311,6 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
 		if($update_result === false)
 		{
 			echo json_encode(array('success' => $update_result));
-		}
-		elseif(isset($update_result['status'])) //RUKI biar error saat callback_before_update bisa punya custom notification: following https://www.grocerycrud.com/forums/topic/2109-error-messages/#entry15705
-		{
-			$error_message = '<p>'.$update_result['message']. '</p>';
-			echo json_encode(array(
-			'success' => $update_result['status'] ,
-			'error_message' => $error_message,
-				));
 		}
 		else
 		{
@@ -3125,7 +3137,7 @@ class grocery_CRUD_Layout extends grocery_CRUD_Model_Driver
  *
  * @package    	grocery CRUD
  * @author     	John Skoumbourdis <scoumbourdisj@gmail.com>
- * @version    	1.6.1
+ * @version    	1.6.4
  */
 class grocery_CRUD_States extends grocery_CRUD_Layout
 {
@@ -3349,6 +3361,42 @@ class grocery_CRUD_States extends grocery_CRUD_Layout
 		return $state_code;
 	}
 
+	// protected function state_url($url = '', $is_list_page = false)
+	// {
+	// 	//Easy scenario, we had set the crud_url_path
+	// 	if (!empty($this->crud_url_path)) {
+	// 		$state_url = !empty($this->list_url_path) && $is_list_page?
+	// 						$this->list_url_path :
+	// 						$this->crud_url_path.'/'.$url ;
+	// 	} else {
+	// 		//Complicated scenario. The crud_url_path is not specified so we are
+	// 		//trying to understand what is going on from the URL.
+	// 		$ci = &get_instance();
+
+	// 		$segment_object = $this->get_state_info_from_url();
+	// 		$method_name = $this->get_method_name();
+	// 		$segment_position = $segment_object->segment_position;
+
+	// 		$state_url_array = array();
+
+	// 	    if( sizeof($ci->uri->segments) > 0 ) {
+	// 	      foreach($ci->uri->segments as $num => $value)
+	// 	      {
+	// 	        $state_url_array[$num] = $value;
+	// 	        if($num == ($segment_position - 1))
+	// 	          break;
+	// 	      }
+
+	// 	      if( $method_name == 'index' && !in_array( 'index', $state_url_array ) ) //there is a scenario that you don't have the index to your url
+	// 	        $state_url_array[$num+1] = 'index';
+	// 	    }
+
+	// 		$state_url =  site_url(implode('/',$state_url_array).'/'.$url);
+	// 	}
+
+	// 	return $state_url;
+	// }
+
 	protected function state_url($url = '', $is_list_page = false)
 	{
 		//Easy scenario, we had set the crud_url_path
@@ -3359,70 +3407,125 @@ class grocery_CRUD_States extends grocery_CRUD_Layout
 		} else {
 			//Complicated scenario. The crud_url_path is not specified so we are
 			//trying to understand what is going on from the URL.
-			$ci = &get_instance();
-
 			$segment_object = $this->get_state_info_from_url();
-			$method_name = $this->get_method_name();
 			$segment_position = $segment_object->segment_position;
 
 			$state_url_array = array();
+            $segments = explode('/', uri_string());
 
-		    if( sizeof($ci->uri->segments) > 0 ) {
-		      foreach($ci->uri->segments as $num => $value)
-		      {
+		    if( sizeof($segments) > 0 ) {
+		      foreach($segments as $num => $value) {
 		        $state_url_array[$num] = $value;
-		        if($num == ($segment_position - 1))
-		          break;
+		        if($num == ($segment_position - 1)) {
+                    break;
+                }
 		      }
-
-		      if( $method_name == 'index' && !in_array( 'index', $state_url_array ) ) //there is a scenario that you don't have the index to your url
-		        $state_url_array[$num+1] = 'index';
 		    }
 
-			$state_url =  site_url(implode('/',$state_url_array).'/'.$url);
+		    // $operation = $url !== '' ? '/' . $url : '';
+		    $operation = $url !== '' ? '/index/' . $url : ''; //Ruki added "index/" because modifying route as below is not practical.
+				//$routes->get('CONTROLLER_NAME/(:any)', 'CONTROLLER_NAME::index/$1');
+
+			$state_url =  site_url(implode('/',$state_url_array) . $operation);
 		}
 
 		return $state_url;
 	}
 
+	// protected function get_state_info_from_url()
+	// {
+	// 	$ci = &get_instance();
+
+	// 	$segment_position = count($ci->uri->segments) + 1;
+	// 	$operation = 'list';
+
+	// 	$segements = $ci->uri->segments;
+	// 	foreach($segements as $num => $value)
+	// 	{
+	// 		if($value != 'unknown' && in_array($value, $this->states))
+	// 		{
+	// 			$segment_position = (int)$num;
+	// 			$operation = $value; //I don't have a "break" here because I want to ensure that is the LAST segment with name that is in the array.
+	// 		}
+	// 	}
+
+	// 	$function_name = $this->get_method_name();
+
+	// 	if($function_name == 'index' && !in_array('index',$ci->uri->segments))
+	// 		$segment_position++;
+
+	// 	$first_parameter = isset($segements[$segment_position+1]) ? $segements[$segment_position+1] : null;
+	// 	$second_parameter = isset($segements[$segment_position+2]) ? $segements[$segment_position+2] : null;
+
+	// 	return (object)array('segment_position' => $segment_position, 'operation' => $operation, 'first_parameter' => $first_parameter, 'second_parameter' => $second_parameter);
+	// }
+
+	// protected function get_method_hash()
+	// {
+	// 	$ci = &get_instance();
+
+	// 	$state_info = $this->get_state_info_from_url();
+	// 	$extra_values = $ci->uri->segment($state_info->segment_position - 1) != $this->get_method_name() ? $ci->uri->segment($state_info->segment_position - 1) : '';
+
+	// 	return $this->crud_url_path !== null
+	// 				? md5($this->crud_url_path)
+	// 				: md5($this->get_controller_name().$this->get_method_name().$extra_values);
+	// }
+
+	// protected function get_method_name()
+	// {
+	// 	$ci = &get_instance();
+	// 	return $ci->router->method;
+	// }
+
+	// protected function get_controller_name()
+	// {
+	// 	$ci = &get_instance();
+	// 	return $ci->router->class;
+	// }
+
 	protected function get_state_info_from_url()
-	{
-		$ci = &get_instance();
+    {
+        $segments = explode('/', uri_string());
 
-		$segment_position = count($ci->uri->segments) + 1;
-		$operation = 'list';
+        $segment_position = count($segments) + 1;
+        $operation = 'list';
 
-		$segements = $ci->uri->segments;
-		foreach($segements as $num => $value)
-		{
-			if($value != 'unknown' && in_array($value, $this->states))
-			{
-				$segment_position = (int)$num;
-				$operation = $value; //I don't have a "break" here because I want to ensure that is the LAST segment with name that is in the array.
-			}
-		}
+        foreach($segments as $num => $value) {
+            if($value != 'unknown' && in_array($value, $this->states)) {
+                // We want to ensure that is the LAST segment with name that is in the array.
+                // That's why we are not stopping the foreach statement
+                $segment_position = (int)$num;
+                $operation = $value;
+            }
+        }
 
-		$function_name = $this->get_method_name();
+        $first_parameter = isset($segments[$segment_position+1]) ? $segments[$segment_position+1] : null;
+        $second_parameter = isset($segments[$segment_position+2]) ? $segments[$segment_position+2] : null;
 
-		if($function_name == 'index' && !in_array('index',$ci->uri->segments))
-			$segment_position++;
+        return (object)[
+            'segment_position' => $segment_position,
+            'operation' => $operation,
+            'first_parameter' => $first_parameter,
+            'second_parameter' => $second_parameter
+        ];
+    }
 
-		$first_parameter = isset($segements[$segment_position+1]) ? $segements[$segment_position+1] : null;
-		$second_parameter = isset($segements[$segment_position+2]) ? $segements[$segment_position+2] : null;
+    protected function getUriSegment($position) {
+        $segments = explode('/', uri_string());
 
-		return (object)array('segment_position' => $segment_position, 'operation' => $operation, 'first_parameter' => $first_parameter, 'second_parameter' => $second_parameter);
-	}
+        if (array_key_exists($position, $segments)) {
+            return $segments[$position];
+        }
+
+        return false;
+    }
 
 	protected function get_method_hash()
 	{
-		$ci = &get_instance();
-
-		$state_info = $this->get_state_info_from_url();
-		$extra_values = $ci->uri->segment($state_info->segment_position - 1) != $this->get_method_name() ? $ci->uri->segment($state_info->segment_position - 1) : '';
-
 		return $this->crud_url_path !== null
 					? md5($this->crud_url_path)
-					: md5($this->get_controller_name().$this->get_method_name().$extra_values);
+					: md5(uri_string());
 	}
 
 	protected function get_method_name()
@@ -3499,8 +3602,7 @@ class grocery_CRUD_States extends grocery_CRUD_Layout
         }
     }
 
-	// protected function getEditUrl($primary_key = null)
-	function getEditUrl($primary_key = null)
+	protected function getEditUrl($primary_key = null)
 	{
 		if($primary_key === null)
 			return $this->state_url('edit');
@@ -3578,7 +3680,7 @@ class grocery_CRUD_States extends grocery_CRUD_Layout
  * @package    	grocery CRUD
  * @copyright  	Copyright (c) 2010 through 2014, John Skoumbourdis
  * @license    	https://github.com/scoumbourdis/grocery-crud/blob/master/license-grocery-crud.txt
- * @version    	1.6.1
+ * @version    	1.6.4
  * @author     	John Skoumbourdis <scoumbourdisj@gmail.com>
  */
 
@@ -3601,17 +3703,15 @@ class Grocery_CRUD extends grocery_CRUD_States
 	 *
 	 * @var	string
 	 */
-	const	VERSION = "1.6.1";
+	const	VERSION = "1.6.4";
 
-	const	JQUERY 			= "jquery-1.11.1.min.js";
+	const	JQUERY 			= "jquery-2.2.4.min.js";
 	const	JQUERY_UI_JS 	= "jquery-ui-1.10.3.custom.min.js";
 	const	JQUERY_UI_CSS 	= "jquery-ui-1.10.1.custom.min.css";
 
 	protected $state_code 			= null;
 	protected $state_info 			= null;
 	protected $columns				= null;
-	protected $columnNoSearch				= null;
-	protected $columnNoSorting				= null;
 
 	private $basic_db_table_checked = false;
 	private $columns_checked		= false;
@@ -3639,9 +3739,6 @@ class Grocery_CRUD extends grocery_CRUD_States
 	protected $subject 				= null;
 	protected $subject_plural 		= null;
 	protected $display_as 			= array();
-	protected $shown_field_info 	= null;
-	
-	
 	protected $order_by 			= null;
 	protected $where 				= array();
 	protected $like 				= array();
@@ -3708,9 +3805,9 @@ class Grocery_CRUD extends grocery_CRUD_States
 	protected $default_css_path			= null; //autogenerate, please do not modify
 	protected $default_texteditor_path 	= null; //autogenerate, please do not modify
 	protected $default_theme_path		= null; //autogenerate, please do not modify
-	protected $default_language_path	= 'assets/grocery_crud/languages';
-	protected $default_config_path		= 'assets/grocery_crud/config';
-	protected $default_assets_path		= 'assets/grocery_crud';
+	protected $default_language_path	= 'grocery_crud/languages';
+	protected $default_config_path		= 'grocery_crud/config';
+	protected $default_assets_path		= 'grocery_crud';
 
 	/**
 	 *
@@ -3723,25 +3820,6 @@ class Grocery_CRUD extends grocery_CRUD_States
 
 	}
 
-	///by ruki: hide search in certain column
-	public function columnNoSearch(){
-		$args = func_get_args();
-		if(isset($args[0]) && is_array($args[0])){
-			$args = $args[0];
-		}
-		$this->columnNoSearch = $args;
-		return $this;
-	}
-	///by ruki: disable sorting in certain column
-	public function columnNoSorting(){
-		$args = func_get_args();
-		if(isset($args[0]) && is_array($args[0])){
-			$args = $args[0];
-		}
-		$this->columnNoSorting = $args;
-		return $this;
-	}
-	
 	/**
 	 * The displayed columns that user see
 	 *
@@ -4227,23 +4305,6 @@ class Grocery_CRUD extends grocery_CRUD_States
 		}
 		return $this;
 	}
-	
-	//ruki
-	public function shown_field_info($field_name, $shown_field_info = null)
-	{
-		if(is_array($field_name))
-		{
-			foreach($field_name as $field => $shown_field_info)
-			{
-				$this->shown_field_info[$field] = $shown_field_info;
-			}
-		}
-		elseif($shown_field_info !== null)
-		{
-			$this->shown_field_info[$field_name] = $shown_field_info;
-		}
-		return $this;
-	}
 
 	/**
 	 *
@@ -4303,6 +4364,7 @@ class Grocery_CRUD extends grocery_CRUD_States
 	 */
 	public function set_lang_string($handle, $lang_string){
 		$this->lang_strings[$handle] = $lang_string;
+
 		return $this;
 	}
 
@@ -4533,9 +4595,9 @@ class Grocery_CRUD extends grocery_CRUD_States
 				foreach($this->read_fields as $field_num => $field)
 				{
 					if(isset($this->display_as[$field]))
-						$this->read_fields[$field_num] = (object)array('field_name' => $field, 'display_as' => $this->display_as[$field]);
+                        $this->read_fields[$field_num] = (object)array('field_name' => $field, 'display_as' => $this->display_as[$field]);
 					else
-						$this->read_fields[$field_num] = (object)array('field_name' => $field, 'display_as' => $field_types[$field]->display_as);
+                        $this->read_fields[$field_num] = (object)array('field_name' => $field, 'display_as' => $field_types[$field]->display_as);
 				}
 			}
 			else
@@ -4618,35 +4680,82 @@ class Grocery_CRUD extends grocery_CRUD_States
 		return $this;
 	}
 
+	// protected function _initialize_helpers()
+	// {
+	// 	$ci = &get_instance();
+
+	// 	$ci->load->helper('url');
+	// 	$ci->load->helper('form');
+	// }
+
+	
 	protected function _initialize_helpers()
 	{
-		$ci = &get_instance();
-
-		$ci->load->helper('url');
-		$ci->load->helper('form');
+		helper('url');
+		helper('form');
 	}
+
+	// protected function _initialize_variables()
+	// {
+	// 	$ci = &get_instance();
+	// 	$ci->load->config('grocery_crud');
+
+	// 	$this->config = (object)array();
+
+	// 	/** Initialize all the config variables into this object */
+	// 	$this->config->default_language 	= $ci->config->item('grocery_crud_default_language');
+	// 	$this->config->date_format 			= $ci->config->item('grocery_crud_date_format');
+	// 	$this->config->default_per_page		= $ci->config->item('grocery_crud_default_per_page');
+	// 	$this->config->file_upload_allow_file_types	= $ci->config->item('grocery_crud_file_upload_allow_file_types');
+	// 	$this->config->file_upload_max_file_size	= $ci->config->item('grocery_crud_file_upload_max_file_size');
+	// 	$this->config->default_text_editor	= $ci->config->item('grocery_crud_default_text_editor');
+	// 	$this->config->text_editor_type		= $ci->config->item('grocery_crud_text_editor_type');
+	// 	$this->config->character_limiter	= $ci->config->item('grocery_crud_character_limiter');
+	// 	$this->config->dialog_forms			= $ci->config->item('grocery_crud_dialog_forms');
+	// 	$this->config->paging_options		= $ci->config->item('grocery_crud_paging_options');
+    //     $this->config->default_theme        = $ci->config->item('grocery_crud_default_theme');
+    //     $this->config->environment          = $ci->config->item('grocery_crud_environment');
+    //     $this->config->xss_clean            = $ci->config->item('grocery_crud_xss_clean');
+
+	// 	/** Initialize default paths */
+	// 	$this->default_javascript_path				= $this->default_assets_path.'/js';
+	// 	$this->default_css_path						= $this->default_assets_path.'/css';
+	// 	$this->default_texteditor_path 				= $this->default_assets_path.'/texteditor';
+	// 	$this->default_theme_path					= $this->default_assets_path.'/themes';
+
+	// 	$this->character_limiter = $this->config->character_limiter;
+
+	// 	if ($this->character_limiter === 0 || $this->character_limiter === '0') {
+	// 		$this->character_limiter = 1000000; //a very big number
+	// 	} elseif($this->character_limiter === null || $this->character_limiter === false) {
+	// 		$this->character_limiter = 30; //is better to have the number 30 rather than the 0 value
+	// 	}
+
+    //     if ($this->theme === null && !empty($this->config->default_theme)) {
+    //         $this->set_theme($this->config->default_theme);
+    //     }
+	// }
 
 	protected function _initialize_variables()
 	{
-		$ci = &get_instance();
-		$ci->load->config('grocery_crud');
-
 		$this->config = (object)array();
 
+		$config = new \Config\GroceryCrud();
+
 		/** Initialize all the config variables into this object */
-		$this->config->default_language 	= $ci->config->item('grocery_crud_default_language');
-		$this->config->date_format 			= $ci->config->item('grocery_crud_date_format');
-		$this->config->default_per_page		= $ci->config->item('grocery_crud_default_per_page');
-		$this->config->file_upload_allow_file_types	= $ci->config->item('grocery_crud_file_upload_allow_file_types');
-		$this->config->file_upload_max_file_size	= $ci->config->item('grocery_crud_file_upload_max_file_size');
-		$this->config->default_text_editor	= $ci->config->item('grocery_crud_default_text_editor');
-		$this->config->text_editor_type		= $ci->config->item('grocery_crud_text_editor_type');
-		$this->config->character_limiter	= $ci->config->item('grocery_crud_character_limiter');
-		$this->config->dialog_forms			= $ci->config->item('grocery_crud_dialog_forms');
-		$this->config->paging_options		= $ci->config->item('grocery_crud_paging_options');
-        $this->config->default_theme        = $ci->config->item('grocery_crud_default_theme');
-        $this->config->environment          = $ci->config->item('grocery_crud_environment');
-        $this->config->xss_clean            = $ci->config->item('grocery_crud_xss_clean');
+        $this->config->default_language 	= $config->default_language;
+        $this->config->date_format 			= $config->date_format;
+        $this->config->default_per_page		= $config->default_per_page;
+        $this->config->file_upload_allow_file_types	= $config->file_upload_allow_file_types;
+        $this->config->file_upload_max_file_size	= $config->file_upload_max_file_size;
+        $this->config->default_text_editor	= $config->default_text_editor;
+        $this->config->text_editor_type		= $config->text_editor_type;
+        $this->config->character_limiter	= $config->character_limiter;
+        $this->config->dialog_forms			= false;
+        $this->config->paging_options		= $config->paging_options;
+        $this->config->default_theme        = $config->default_theme;
+        $this->config->environment          = $config->environment;
+        $this->config->xss_clean            = $config->xss_clean;
 
 		/** Initialize default paths */
 		$this->default_javascript_path				= $this->default_assets_path.'/js';
@@ -4677,6 +4786,17 @@ class Grocery_CRUD extends grocery_CRUD_States
 			}
 		}
 	}
+
+	// protected function _set_primary_keys_to_model()
+	// {
+	// 	if(!empty($this->primary_keys))
+	// 	{
+	// 		foreach($this->primary_keys as $primary_key)
+	// 		{
+	// 			$this->basic_model->set_primary_key($primary_key['field_name'],$primary_key['table_name']);
+	// 		}
+	// 	}
+	// }
 
 	/**
 	 * Initialize all the required libraries and variables before rendering

@@ -1,4 +1,6 @@
-<?php namespace Config;
+<?php
+
+namespace Config;
 
 use CodeIgniter\Config\BaseConfig;
 
@@ -19,10 +21,10 @@ class App extends BaseConfig
 	| and path to your installation. However, you should always configure this
 	| explicitly and never rely on auto-guessing, especially in production
 	| environments.
-	|
+	| $config['base_url'] = 'http://localhost/CodeIgniter4/';
+
 	*/
-	public $baseURL = 'http://localhost.pwa/login';
-	// public $baseURL = 'http://localhost.sc/';
+	public $baseURL = 'https://fadil.website/';
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,7 +36,7 @@ class App extends BaseConfig
 	| variable so that it is blank.
 	|
 	*/
-	// public $indexPage = 'index.php';
+// 	public $indexPage = 'index.php';
 	public $indexPage = '';
 
 	/*

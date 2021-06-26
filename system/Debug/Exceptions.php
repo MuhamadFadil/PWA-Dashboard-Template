@@ -47,6 +47,8 @@ use function error_reporting;
 use ErrorException;
 use Throwable;
 
+
+// ini_set('memory_limit', '512M');
 /**
  * Exceptions manager
  */

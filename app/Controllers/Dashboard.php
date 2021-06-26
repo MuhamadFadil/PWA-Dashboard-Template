@@ -13,10 +13,9 @@ class Dashboard extends Controller
 				return redirect()->to('login');
 		}
 		if ($_SESSION['DATA_SESSION']['role'] == "Admin") {
-			return redirect()->to('users/users_management');
+			return redirect()->to('users/index');
 		}
 		return view("dashboard");
-		
 
 	}
 }

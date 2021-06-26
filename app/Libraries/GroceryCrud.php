@@ -1,4 +1,6 @@
-<?php namespace App\Libraries;
+<?php 
+namespace App\Libraries;
+use stdClass; 
 /**
  * PHP grocery CRUD
  *
@@ -22,6 +24,7 @@
 
 // ------------------------------------------------------------------------
 
+use Exception;
 /**
  * grocery Field Types
  *
@@ -32,6 +35,7 @@
  * @license     https://github.com/scoumbourdis/grocery-crud/blob/master/license-grocery-crud.txt
  * @link		http://www.grocerycrud.com/documentation
  */
+ 
 class grocery_CRUD_Field_Types
 {
 	/**
@@ -807,14 +811,19 @@ class grocery_CRUD_Model_Driver extends grocery_CRUD_Field_Types
 
 	protected function form_validation()
 	{
-		if($this->form_validation === null)
-		{
-			$this->form_validation = new grocery_CRUD_Form_validation();
-			$ci = &get_instance();
-			$ci->load->library('form_validation');
-			$ci->form_validation = $this->form_validation;
-		}
-		return $this->form_validation;
+		// if($this->form_validation === null)
+		// {
+		// 	$this->form_validation = new grocery_CRUD_Form_validation();
+		// 	$ci = &get_instance();
+		// 	$ci->load->library('form_validation');
+		// 	$ci->form_validation = $this->form_validation;
+		// }
+		// return $this->form_validation;
+
+		if($this->form_validation === null) {
+            $this->form_validation = \Config\Services::validation();
+        }
+        return $this->form_validation;
 	}
 
 	protected function db_update_validation()
@@ -3616,7 +3625,11 @@ class GroceryCrud extends grocery_CRUD_States
 	 */
 	const	VERSION = "2.0.0";
 
-	const	JQUERY 			= "jquery-1.11.1.min.js";
+// 	const	JQUERY 			= "jquery-1.11.1.min.js";
+// 	const	JQUERY_UI_JS 	= "jquery-ui-1.10.3.custom.min.js";
+// 	const	JQUERY_UI_CSS 	= "jquery-ui-1.10.1.custom.min.css";
+	
+	const	JQUERY 			= "jquery-2.2.4.min.js";
 	const	JQUERY_UI_JS 	= "jquery-ui-1.10.3.custom.min.js";
 	const	JQUERY_UI_CSS 	= "jquery-ui-1.10.1.custom.min.css";
 
@@ -3716,9 +3729,9 @@ class GroceryCrud extends grocery_CRUD_States
 	protected $default_css_path			= null; //autogenerate, please do not modify
 	protected $default_texteditor_path 	= null; //autogenerate, please do not modify
 	protected $default_theme_path		= null; //autogenerate, please do not modify
-	protected $default_language_path	= 'assets/grocery_crud/languages';
-	protected $default_config_path		= 'assets/grocery_crud/config';
-	protected $default_assets_path		= 'assets/grocery_crud';
+	protected $default_language_path	= 'grocery_crud/languages';
+	protected $default_config_path		= 'grocery_crud/config';
+	protected $default_assets_path		= 'grocery_crud';
 
 	/**
 	 *
@@ -5554,6 +5567,12 @@ class Grocery_Crud_Uploader
         }
     }
 
+
+    //function stdClass - Fadil
+    // public function stdClass(){
+        
+    // }
+    
     function getFullUrl() {
       	return
         		(isset($_SERVER['HTTPS']) ? 'https://' : 'http://').

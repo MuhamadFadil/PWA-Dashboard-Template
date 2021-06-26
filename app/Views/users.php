@@ -1,6 +1,7 @@
 <?php
 $data = ['css_files' => $css_files, 'js_files' => $js_files];
-echo view("parts/header", $data); ?>
+echo view("parts/header", $data); 
+?>
 <script>
 $(function() {
     $('#kota').change(function(e) {
@@ -85,8 +86,6 @@ $(document).ready(function(){
 			}
 		});
 	</script>
-
-
 
 </div>
 

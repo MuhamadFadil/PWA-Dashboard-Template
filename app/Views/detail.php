@@ -1,7 +1,6 @@
 <?php echo view("parts/header");
-// echo view("parts/upup");
-//echo view("parts/load");
-?>
+echo view("parts/upup");
+//echo view("parts/load");?>
 
 <?= $this->section('content'); ?>
 <div class="container">

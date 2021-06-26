@@ -1,6 +1,4 @@
 <?php
-namespace App\Models;
-use CodeIgniter\Model;
 /**
  * PHP grocery CRUD
  *
@@ -29,7 +27,7 @@ use CodeIgniter\Model;
  * @version    	1.5.6
  * @link		http://www.grocerycrud.com/documentation
  */
-class Grocery_crud_model  extends Model  {
+class Grocery_crud_model  extends CI_Model  {
 
 	protected $primary_key = null;
 	protected $table_name = null;
@@ -44,7 +42,7 @@ class Grocery_crud_model  extends Model  {
 
     function db_table_exists($table_name = null)
     {
-    	return $this->db->table($table_name);
+    	return $this->db->table_exists($table_name);
     }
 
     function get_list()

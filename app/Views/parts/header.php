@@ -15,10 +15,10 @@
   <?php if(isset($css_files)){ //for groceryCrud:
 		foreach($css_files as $f){echo '<link type="text/css" rel="stylesheet" href="'.$f.'" />';} foreach($js_files  as $f){echo '<script src="'.$f.'"></script>';} 
 	}else{ echo '
-		<link type="text/css" rel="stylesheet" href="'.base_url().'/grocery-crud/css/bootstrap/bootstrap.css" />
-		<link type="text/css" rel="stylesheet" href="'.base_url().'/grocery-crud/css/jquery-ui/jquery-ui.css" />
-		<script src="'.base_url().'/grocery-crud/js/jquery/jquery.js"></script>
-		<script src="'.base_url().'/grocery-crud/js/libraries/jquery-ui.js"></script>';
+		<link type="text/css" rel="stylesheet" href="'.base_url().'/grocery_crud/css/bootstrap/bootstrap.css" />
+		<link type="text/css" rel="stylesheet" href="'.base_url().'/grocery_crud/css/jquery-ui/jquery-ui.css" />
+		<script src="'.base_url().'/grocery_crud/js/jquery/jquery.js"></script>
+		<script src="'.base_url().'/grocery_crud/js/libraries/jquery-ui.js"></script>';
 	} ?>
 	<?php //for forms: ?>
   <link rel="stylesheet" href="<?= base_url("assets/plugins/iCheck/square/blue.css"); ?>">
@@ -403,7 +403,7 @@
     <header class="main-header">
       <a href="" class="logo">
         <span class="logo-mini" aria-info="50x50px"><b>PW</b>A </span>
-        <span class="logo-lg"><b>PWA</b> DashBoard</span>
+        <span class="logo-lg"><b>PWA</b> DashBoard </span>
 			</a>
       <nav class="navbar navbar-static-top">
         <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -411,12 +411,6 @@
         </a>
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
-			  <li class="dropdown notifications-menu">
-				  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					<i class="fa fa-bell-o"></i>
-					<span class="label labe-warning"></span>
-				  </a>
-			  </li>
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?php
@@ -443,7 +437,7 @@
                 </li>
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="<?= base_url('users#/edit'); ?><?= "/" . $_SESSION['DATA_SESSION']['id']; ?>" class="btn btn-default btn-flat">Edit Profile & Password</a>
+                    <a href="<?= base_url('users/index/edit/'); ?><?= "/" . $_SESSION['DATA_SESSION']['id']; ?>" class="btn btn-default btn-flat">Edit Profile & Password</a>
                   </div>
                   <div class="pull-right">
                     <a href="<?= base_url('logout'); ?>" style="border-right:none" class="btn btn-default btn-flat">Logout</a>
@@ -459,7 +453,6 @@
       <section class="sidebar"><?= view('parts/menu'); ?></section>
     </aside>
 		<div class="content-wrapper">
-
-
-<script src="<?= base_url(); ?>/assets/dist/js/sweetalert2.all.min.js"></script>
-<script src="<?= base_url(); ?>/assets/dist/js/myscript.js"></script>
+    		    
+    <script src="<?= base_url (); ?>/assets/sweatalert/sweetalert2.all.min.js"></script>
+    <script src="<?= base_url (); ?>/assets/sweatalert/myscript.js"></script>

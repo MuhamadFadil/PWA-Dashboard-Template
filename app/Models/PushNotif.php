@@ -7,7 +7,7 @@ use Zend\Db\Sql\Sql;
 use Minishlink\WebPush\WebPush;
 use Minishlink\WebPush\Subscription;
         
-require APPPATH . 'views/vendor/autoload.php';
+require APPPATH . 'Views/vendor/autoload.php';
 // require_once "vendor/autoload.php";
 
 class PushNotif extends Model
@@ -24,7 +24,7 @@ class PushNotif extends Model
             return $this->findAll();
         }
 
-        return $this->where(['id_subs' => $id_subs])->first();
+        return $this->where(['id' => $id_subs])->first();
     }
     
     function tampil()
@@ -131,12 +131,15 @@ class PushNotif extends Model
 		}
 		
 		$payload = 'Pasti Bisa Nyook!';
+        //const publicKey = 'BOE99lvdjCbHi6nI17XW76tG_X4lzuZYo3cPfwhqdcSSMKcyMNVcpnT3VbNkUBtoZuuul5NX3Xh3S7vTa0eGt0U';
+        //const privateKey = 'ufRraaod9VVDblESL-oabmV0SsOXFxm03bIr-kK7Aq8'; 
 		
 		$auth = [
 		    'VAPID' => [
-		        'subject' => 'mailto:mufadil98@gmail.com', // can be a mailto: or your website address
-		        'publicKey' => 'BHugL3rwhWzHwhmHW14GmXLeKesJdVr2mZ7bmm1ZFplknHj8sTjrW3T-cXGYn8zAZJn-HWMN5Aiulwg1PNf_jXE', // (recommended) uncompressed public key P-256 encoded in Base64-URL
-		        'privateKey' => '-QIJ_6d2Wg50ZJewUD0MjEbmhW85pJj4wYf16uZ9Goo', // (recommended) in fact the secret multiplier of the private key encoded in Base64-URL
+		        'subject' => 'http://localhost:8080/', // can be a mailto: or your website address
+		        'publicKey' => 'BOE99lvdjCbHi6nI17XW76tG_X4lzuZYo3cPfwhqdcSSMKcyMNVcpnT3VbNkUBtoZuuul5NX3Xh3S7vTa0eGt0U
+', // (recommended) uncompressed public key P-256 encoded in Base64-URL
+		        'privateKey' => 'ufRraaod9VVDblESL-oabmV0SsOXFxm03bIr-kK7Aq8', // (recommended) in fact the secret multiplier of the private key encoded in Base64-URL
 		    ],
 		];
 		

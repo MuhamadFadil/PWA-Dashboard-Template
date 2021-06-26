@@ -1,7 +1,5 @@
 <?php
 namespace GroceryCrud\Core;
-namespace CodeIgniter;
-
 
 use Zend\Db\Adapter\Profiler\ProfilerInterface;
 use GroceryCrud\Core\Profiler\FileProfiler;
@@ -1291,15 +1289,5 @@ ORDER BY KU.TABLE_NAME, KU.ORDINAL_POSITION;");
         $results = $this->concatRelationalData($results, $resultsIds);
 
         return $results;
-    }
-
-        /**
-     * Cast request to string (JSON)
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->toJson();
     }
 }

@@ -18,7 +18,6 @@
 
 use CodeIgniter\Model;
 
-
 // ------------------------------------------------------------------------
 
 /**
@@ -41,7 +40,7 @@ class GroceryCrudModel extends Model {
 
     function db_table_exists($table_name = null)
     {
-    	return $this->db->table($table_name);
+    	return $this->db->tableExists($table_name);
     }
 
     public function setBuilder($tableName) {

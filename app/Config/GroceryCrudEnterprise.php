@@ -15,7 +15,7 @@ class GroceryCrudEnterprise extends BaseConfig
             'default_language'	=> 'English',
 
             // This is the assets folder where all the JavaScript, CSS, images and font files are located
-            'assets_folder' => base_url() . '/assets/grocery-crud/',
+            'assets_folder' => base_url() . '/grocery_crud/',
 
             // There are only three choices: "uk-date" (dd/mm/yyyy), "us-date" (mm/dd/yyyy) or "sql-date" (yyyy-mm-dd)
             'date_format' => 'uk-date',
@@ -31,7 +31,7 @@ class GroceryCrudEnterprise extends BaseConfig
             'environment' => 'development',
 
             // The default skin that Grocery CRUD will use. Currently choose between 'bootstrap-v3' and 'bootstrap-v4'
-            'skin' => 'bootstrap-v4',
+            'skin' => 'bootstrap-v3',
 
             // This is basically in order to have a php cache. Be aware that in case you disable the php cache
             // things will get too slow
@@ -44,7 +44,7 @@ class GroceryCrudEnterprise extends BaseConfig
             'column_character_limiter' => 99,
 
             // You can choose between 'minimal' or 'full'
-            'text_editor_type' => 'minimal',
+            'text_editor_type' => 'full',
 
             // If open_in_modal is true then all the form operations (e.g. add, edit, clone... e.t.c.) will
             // open within a modal and we will have the datagrid on the background.
@@ -59,6 +59,13 @@ class GroceryCrudEnterprise extends BaseConfig
 
             // For more read http://framework.zend.com/manual/current/en/modules/zend.cache.storage.adapter.html
             // If you are not sure about how to use it, you can just change the ttl value (time to live) and
+            
+            'upload_allowed_file_types' =>  [
+                        'gif', 'jpeg', 'jpg', 'png', 'svg', 'tiff', 'doc', 'docx',  'rtf', 'txt', 'odt', 'xls', 'xlsx', 'pdf',
+                        'ppt', 'pptx', 'pps', 'ppsx', 'mp3', 'm4a', 'ogg', 'wav', 'mp4', 'm4v', 'mov', 'wmv', 'flv', 'avi',
+                        'mpg', 'ogv', '3gp', '3g2'
+                    ],    
+            
             // the file path of the cache
             'cache' => [
                 'adapter' => [

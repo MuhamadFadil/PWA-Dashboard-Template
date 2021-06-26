@@ -44,7 +44,6 @@
 
   <link rel="stylesheet" href="<?php echo base_url("assets/plugins/iCheck/square/blue.css"); ?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/plugins/toastr/toastr.min.css"); ?>">
-  <link href="assets/master-icon/css/material-icons.min.css" rel="stylesheet">
 
   <script src="<?php echo base_url("assets/plugins/jQuery/jquery-2.2.3.min.js"); ?>"></script>
 

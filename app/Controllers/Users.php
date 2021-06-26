@@ -1,12 +1,37 @@
 <?php 
 namespace App\Controllers;
 use App\Libraries\GroceryCrud;
+use Grocery_CRUD;
 
 class Users extends BaseController{	
-
 	public function index(){
 		if(Users::check()==0){return redirect()->to('login');}
+		
+		$o['title'] = 'Users';
+		$c = new GroceryCRUD();
+		$c->set_subject($o['title']);
+	    $c->setTable('users');
+	    $c->columns('name','kota','photo','address', 'status', 'role', 'last_login'); 
+		//$c->unique_fields(['email']);
+		//$c->unset_export(); 
+		$c->set_read_fields(['created','last_login','provinsi']);
+		//$c->field_type('provinsi','hidden');
+		$c->field_type('password','hidden');
+		$c->field_type('last_login','hidden');
+		$c->display_as('kota','Kota/Kabupaten');
+		$c->display_as('photo','Foto');
+		$c->set_field_upload('photo','/assets/uploads/user_photo');
+		$c->callback_after_upload(array($this, 'example_callback_after_upload'));
+        $c->unset_clone();
 
+	    $output = $c->render();
+		return $this->_example_output($output,$o);
+		
+	}
+	
+	
+	public function users_management(){
+		if(Users::check()==0){return redirect()->to('login');}
 		
 		$o['title'] = 'Users';
 		$c = $this->_getGroceryCrudEnterprise();
@@ -47,9 +72,9 @@ class Users extends BaseController{
 				->unsetSearchColumns(['name','email']) //ga mempan
 				->unsetDelete();
 			$o['title'] = 'Your Account';
-			if(in_array($c->getState(),['ReadForm','Initial'])){
-				$c->requiredFields([]);
-			}
+			// if(in_array($c->getState(),['ReadForm','Initial'])){
+			// 	$c->requiredFields([]);
+			// }
 		}else{
 			$c->unsetColumns(['photo','address','password']);
 			$c->setRead();
@@ -65,94 +90,31 @@ class Users extends BaseController{
 		
 		// $c->callbackAfterUpdate(array($this, 'update_provinsi'));
 		// $c->callbackAfterInsert(array($this, 'update_provinsi'));
-		$c->callbackBeforeUpdate(array($this,'_before_update')); //provinsi, password
-		$c->callbackBeforeInsert(array($this,'_before_insert')); //set created = date(), provinsi, password, cek unique field
-		$c->callbackDelete(array($this,'_del'));
-		$c->callbackDeleteMultiple(array($this,'_del'));
-		$c->callbackEditField('password',array($this,'set_password_input_to_empty'));
+		//$c->callbackBeforeUpdate(array($this,'_before_update')); //provinsi, password
+		//$c->callbackBeforeInsert(array($this,'_before_insert')); //set created = date(), provinsi, password, cek unique field
+		//$c->callbackDelete(array($this,'_del'));
+		//$c->callbackDeleteMultiple(array($this,'_del'));
+		//$c->callbackEditField('password',array($this,'set_password_input_to_empty'));
 		// $c->callbackEditField('password', function ($v, $pk, $r){return 'tes';});
 		
 	  $output = $c->render();
 		return $this->_example_output($output,$o);
-		// return $this->_exampleOutput($output);
+
 	}
 	
-	public function users_management(){
-		if(Users::check()==0){return redirect()->to('login');}
+	function example_callback_after_upload($uploader_response, $field_info, $files_to_upload)
+    {
+        $this->load->library(Image_moo);
 
-		$o['title'] = 'Users';
-		$c = new GroceryCrud();
-	    $c->setTable('users');
-		//detail
-		$c->unique_fields(['email']);
-		$c->unset_export(); 
-		$c->set_read_fields(['created','last_login','provinsi']);
-		$c->field_type('provinsi','hidden');
-		$c->field_type('password','hidden');
-		$c->field_type('last_login','hidden');
-		$c->display_as('kota','Kota/Kabupaten');
-		$c->set_field_upload('photo','/assets/uploads/user_photo','/assets/uploads/user_photo');
-		// $c->callback_after_upload(array($this, 'example_callback_after_upload'));
-        // $c->unset_clone();
+        //Is only one file uploaded so it ok to use it with $uploader_response[0].
+        // $file_uploaded = $field_info->upload_path . '/assets/uploads/user_photo' . $uploader_response[0]->name;
+        $file_uploaded = $field_info->upload_path.'/'.$uploader_response[0]->name; 
 
-		// cegah non admin CURD yg lain
-		$uid = $_SESSION['DATA_SESSION']['id'];
-		$r = $_SESSION['DATA_SESSION']['role'];
-		if(in_array($c->getState(),['EditForm','Update','ReadForm']) && $r != 'Admin'){
-		  $tmp = $c->getStateInfo();
-			$i = isset($tmp->primaryKeyValue) ? $tmp->primaryKeyValue : 0;
-			if($uid != $i){
-				return redirect()->to('dashboard');
-			}
-		}
-		if($r != 'Admin' && in_array($c->getState(),['RemoveMultiple','RemoveOne','AddForm','Insert'])){
-			return redirect()->to('dashboard');
-		}
+        $this->Image_moo->load($file_uploaded)->resize(800, 600)->save($file_uploaded, true);
 
-		if($r!='Admin'){
-			$c->field_Type('email','readonly');
-			$c->field_Type('status','readonly');
-			$c->field_Type('role','readonly');
-			$c->where(['id'=>$uid]);
-			$c->unset_add();
-				$c->unset_columns(['name','email'])
-				->setConfig('open_in_modal', false)
-				->unsetExport()
-				->unsetPrint()
-				->unsetSearchColumns(['name','email']) //ga mempan
-				->unsetDelete();
-			$o['title'] = 'Your Account';
-			if(in_array($c->getState(),['ReadForm','Initial'])){
-				$c->required_Fields([]);
-			}
-		}else{
-			$c->unset_Columns(['photo','address','password']);
-			$c->set_read_fields();
-			$c->field_type('password','hidden');
-		}
-		
-		if(in_array($c->getState(),['AddForm','Insert','Initial'])){ //initial harus termasuk
-			$c->required_Fields(['name','kota','email','status','role','password']);
-			$c->field_Type('password','password');
-		}else{
-			$c->required_Fields(['name','email','status','role']); //password ga jadi wajib krn klo operasi edit, bisa diisi bisa nggak.
-		}
-
-		$c->callback_after_update(array($this,'_before_update')); //provinsi, password
-		$c->callback_after_insert(array($this,'_before_insert')); //set created = date(), provinsi, password, cek unique field
-		$c->callback_after_delete(array($this,'_del'));
-		// $c->callbackDeleteMultiple(array($this,'_del'));
-		$c->callback_edit_field('password',array($this,'set_password_input_to_empty'));
-
-	    $output = $c->render();
-		return $this->_example_output($output,$o);
-
-	}
-
-	// private function _exampleOutput($output = null) {
-    //     return view('users', (array)$output);
-    // }
-
+        return true;
+    }
+	
 	private function _get_provinsi($kota){
 		$contents = file_get_contents("assets/provinsi.json");
 		$contents = utf8_encode($contents);
@@ -160,9 +122,9 @@ class Users extends BaseController{
     return $results[$kota];
 	}
 	
-// 	public function _example_output($output=null){
-// 		return view('kuesioner', (array)$output);
-//   }
+	// public function _example_output($output = null){
+	// 	return view('kuesioner', (array)$output);
+  // }
 
 	public static function check(){
 		if (session_status() == PHP_SESSION_NONE) {
@@ -219,6 +181,7 @@ class Users extends BaseController{
 		$i->data = $post_array;
 		return $i;
 	}
+	
 	function _before_insert($i) {
 		$post_array = $i->data;
 		$post_array['created'] = date('Y-m-d H:i:s');
@@ -232,6 +195,7 @@ class Users extends BaseController{
 		$i->data = $post_array;
 		return $i;
 	}
+	
 	function _del($i){
 		$ids = [];
 		if(isset($i->primaryKeyValue)){
