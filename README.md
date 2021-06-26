@@ -177,6 +177,10 @@ Output:
     - Kemudian, `start` pada Apache dan MySQL
       ![image](https://user-images.githubusercontent.com/48039483/123473659-1043a480-d623-11eb-9539-c458998a2970.png)
 5. Jalankan http://localhost:8080/
+6. jalankan kode berikut pada terminal VS code
+    ```bash 
+    php spark serve
+    ````
 ## Membuat Database
 1. Jalankan MySQL `admin` atau klik http://localhost:8080/phpmyadmin/
   ![image](https://user-images.githubusercontent.com/48039483/123473775-3cf7bc00-d623-11eb-9d0a-f08824b3c3c0.png)
@@ -199,7 +203,7 @@ Output:
   - Database
   ```bash
   database.default.hostname = localhost
-  database.default.database = pwadashboard_tb
+  database.default.database = pwadashboard_db
   database.default.username = root
   database.default.password = 
   database.default.DBDriver = MySQLi
