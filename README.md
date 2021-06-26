@@ -219,4 +219,4 @@ Output:
       - `UsersModel.php`
  
 ## License
-This package is free software distributed under the terms of the [MIT license](LICENSE.md).
+This package is free software distributed under the terms of the [MIT license](license.txt).
