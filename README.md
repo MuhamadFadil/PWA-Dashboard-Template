@@ -177,7 +177,7 @@ Output:
     - Kemudian, `start` pada Apache dan MySQL
       ![image](https://user-images.githubusercontent.com/48039483/123473659-1043a480-d623-11eb-9539-c458998a2970.png)
 5. Jalankan http://localhost:8080/
-6. jalankan kode berikut pada terminal VS code
+6. Jalankan kode berikut pada terminal VS code
     ```bash 
     php spark serve
     ````
